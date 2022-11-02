@@ -1,0 +1,14 @@
+<div class="user-info mb-4">
+  <h2>User info</h2>
+  <%= image_tag user.get_profile_image(100,100) %>
+  <div class="user-info-name border-top p-2">
+    <b class="pr-5">name</b><b class="pl-4"><%= user.name %></b>
+   </div>
+  <div class="user-info-introduction border-top p-2">
+    <b>introduction</b><b class="pl-4"><%= user.introduction %></b>
+  </div>
+</div>
+      
+<%= link_to edit_user_path(@user), class: 'btn btn-outline-secondary btn-block mb-3' do %>
+  <i class="fas fa-user-cog"></i>
+<% end %>

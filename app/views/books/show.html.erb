@@ -1,0 +1,58 @@
+<div class="container" style="margin-top: 20px; margin-bottom: 30px;">
+  <div class="row books-index">
+    <div class="col-md-3">
+    <%= render 'devise/shared/userinfo', user: @user %>
+     
+      <div style="width: 230px;">
+        <h2>New book</h2>
+        <%= form_with model:Book.new, method: :post do |f| %>
+        <div class="form-group">
+          <label>Title</label><br>
+          <%= f.text_field :title , class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <label>Opinion</label><br>
+          <%= f.text_area :body , class: "form-control" %>
+        </div>
+        <%= f.submit "Create Book", class: "btn btn-sm btn-success" %>
+        <% end %>
+      </div>
+    </div>
+    
+    
+    
+    <div class="col-md-8 offset-md-1 ml-5">
+      <h2>Book detail</h2>
+      <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row">
+            <%= link_to user_path(@user) do %>
+              <%= image_tag @book.user.get_profile_image(70,70) %><br>
+              <%= @user.name %>
+            <% end %>
+            </th>
+            <td>
+            <%= link_to book_path(@book) do %>
+              <%= @book.title %>
+            <% end %>
+            </td>
+            <td>
+            <%= @book.body%>
+            </td>
+            <% if @user.id == current_user.id %>
+              <td>
+                <%= link_to "Edit", edit_book_path(@book), class: "btn btn-success btn-sm" %>
+              </td>
+              <td>
+                <%= link_to book_path(@book), method: :delete, "data-confirm" => "本当に削除しますか？" do %>
+                  <p class="btn btn-danger btn-sm">Destroy</p>
+                <% end %>
+              </td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
